@@ -1,9 +1,6 @@
 package com.api.realtimestatisticsml.models;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.util.Date;
 
 public class Transaction {
     private final OffsetDateTime timestamp;
