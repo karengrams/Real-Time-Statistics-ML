@@ -7,13 +7,16 @@ public class Statistic {
     private final Double min;
     private final Double avg;
     private final long count;
+    private final Double p90;
 
-    public Statistic(Double sum, Double max, Double min, Double avg, long count) {
+
+    public Statistic(Double sum, Double max, Double min, Double avg, long count, Double p90) {
         this.sum = sum;
         this.max = max;
         this.min = min;
         this.avg = avg;
         this.count = count;
+        this.p90 = p90;
     }
 
     public Double getSum() {
@@ -32,7 +35,9 @@ public class Statistic {
         return this.avg;
     }
 
-    public long getCount() {
-        return this.count;
+    public Double getPercentile() {
+        return this.p90;
     }
+
+
 }

@@ -2,6 +2,7 @@ package com.api.realtimestatisticsml.controllers;
 
 import com.api.realtimestatisticsml.cache.TransactionsCache;
 import com.api.realtimestatisticsml.models.Statistic;
+import com.google.common.math.Quantiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,9 +32,21 @@ public class StatisticController {
         return this.transactionsCache.getAllAmounts().stream().mapToDouble(Float::longValue).average().getAsDouble();
     }
 
+    public Double getPercentile(){
+        return Quantiles.percentiles().index(90).compute(this.transactionsCache.getAllAmounts());
+    }
+
+
     @GetMapping("/statistics")
     public Statistic statistics() {
-        return new Statistic(getSum(), getMax(), getMin(), getAvg(), transactionsCache.countTransactions());
+        return new Statistic(
+                getSum(),
+                getMax(),
+                getMin(),
+                getAvg(),
+                transactionsCache.countTransactions(),
+                getPercentile()
+        );
     }
 
 }
