@@ -1,21 +1,38 @@
 package com.api.realtimestatisticsml.models;
 
 public class Statistic {
-    private final Float sum;
-    private final Float avg;
-    private final Float max;
-    private final Float p90;
-    private final Float min;
-    private final Integer count;
 
+    private final Double sum;
+    private final Double max;
+    private final Double min;
+    private final Double avg;
+    private final long count;
 
-    public Statistic(Float sum, Float avg, Float max, Float p90, Float min, Integer count) {
+    public Statistic(Double sum, Double max, Double min, Double avg, long count) {
         this.sum = sum;
-        this.avg = avg;
         this.max = max;
-        this.p90 = p90;
         this.min = min;
+        this.avg = avg;
         this.count = count;
     }
 
+    public Double getSum() {
+        return this.sum;
+    }
+
+    public Double getMax() {
+        return this.max;
+    }
+
+    public Double getMin() {
+        return this.min;
+    }
+
+    public Double getAvg() {
+        return this.avg;
+    }
+
+    public long getCount() {
+        return this.count;
+    }
 }
