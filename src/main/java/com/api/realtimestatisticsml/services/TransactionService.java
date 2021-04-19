@@ -21,11 +21,11 @@ public class TransactionService {
 
     public ResponseEntity<Void> postTransaction(String timestamp, String amount) {
         Instant transactionTimestamp = null;
-        Float transactionAmount = null;
+        Double transactionAmount = null;
 
         try {
             transactionTimestamp = Instant.parse(timestamp);
-            transactionAmount = Float.parseFloat(amount);
+            transactionAmount = Double.parseDouble(amount);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }

@@ -5,9 +5,9 @@ import java.time.OffsetDateTime;
 
 public class Transaction {
     private final Instant timestamp;
-    private final Float amount;
+    private final Double amount;
 
-    public Transaction(Instant timestamp, Float amount) {
+    public Transaction(Instant timestamp, Double amount) {
         this.timestamp = timestamp;
         this.amount = amount;
     }
@@ -16,7 +16,7 @@ public class Transaction {
         return timestamp;
     }
 
-    public Float getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
