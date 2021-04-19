@@ -42,7 +42,7 @@ public class TransactionsCache {
         return new ArrayList<>(this.cache.asMap().values());
     }
 
-    public List<Float> getAllAmounts(){
+    public List<Double> getAllAmounts(){
         return this.cache.asMap().values().stream().map(transaction -> transaction.getAmount()).collect(Collectors.toList());
     }
 
