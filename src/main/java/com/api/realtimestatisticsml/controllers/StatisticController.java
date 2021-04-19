@@ -1,6 +1,6 @@
 package com.api.realtimestatisticsml.controllers;
 
-import com.api.realtimestatisticsml.cache.TransactionsCache;
+import com.api.realtimestatisticsml.repository.TransactionsCache;
 import com.api.realtimestatisticsml.models.Statistic;
 import com.google.common.math.Quantiles;
 import org.springframework.beans.factory.annotation.Autowired;
