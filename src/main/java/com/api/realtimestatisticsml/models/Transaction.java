@@ -1,17 +1,18 @@
 package com.api.realtimestatisticsml.models;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 
 public class Transaction {
-    private final OffsetDateTime timestamp;
+    private final Instant timestamp;
     private final Float amount;
 
-    public Transaction(OffsetDateTime timestamp, Float amount) {
+    public Transaction(Instant timestamp, Float amount) {
         this.timestamp = timestamp;
         this.amount = amount;
     }
 
-    public OffsetDateTime getTimestamp() {
+    public Instant getTimestamp() {
         return timestamp;
     }
 
