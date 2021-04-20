@@ -1,7 +1,7 @@
 package com.api.realtimestatisticsml.controllers;
 
-import com.api.realtimestatisticsml.repository.TransactionsCache;
 import com.api.realtimestatisticsml.models.Statistic;
+import com.api.realtimestatisticsml.repository.TransactionsCache;
 import com.api.realtimestatisticsml.utils.StatisticsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StatisticController {
 
-    private TransactionsCache transactionsCache;
+    private final TransactionsCache transactionsCache;
 
     public StatisticController(@Autowired TransactionsCache transactionsCache) {
         this.transactionsCache = transactionsCache;

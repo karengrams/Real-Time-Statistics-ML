@@ -7,38 +7,29 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.*;
+import java.time.Instant;
 import java.util.List;
 
 @Service
 public class TransactionService {
 
-    private TransactionsCache transactionsCache;
+    private final TransactionsCache transactionsCache;
 
     public TransactionService(@Autowired TransactionsCache transactionsCache) {
         this.transactionsCache = transactionsCache;
     }
 
-    public ResponseEntity<Void> postTransaction(String timestamp, String amount) {
-        Instant transactionTimestamp = null;
-        Double transactionAmount = null;
+    public ResponseEntity<Void> postTransaction(Transaction transaction) {
 
-        try {
-            transactionTimestamp = Instant.parse(timestamp);
-            transactionAmount = Double.parseDouble(amount);
-        } catch (Exception e) {
+        if (Instant.now().isBefore(transaction.getTimestamp())) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
-        if (Instant.now().isBefore(transactionTimestamp)) {
-            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
-        }
-
-        if (transactionTimestamp.isBefore(Instant.now().minusSeconds(60))) {
+        if (transaction.getTimestamp().isBefore(Instant.now().minusSeconds(60))) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        this.transactionsCache.addNewTransaction(new Transaction(transactionTimestamp, transactionAmount));
+        this.transactionsCache.addNewTransaction(transaction);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

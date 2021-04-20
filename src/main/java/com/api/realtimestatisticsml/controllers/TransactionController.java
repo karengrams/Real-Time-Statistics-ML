@@ -1,7 +1,6 @@
 package com.api.realtimestatisticsml.controllers;
 
 import com.api.realtimestatisticsml.models.Transaction;
-
 import com.api.realtimestatisticsml.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import java.util.List;
 @RestController
 public class TransactionController {
 
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
     public TransactionController(@Autowired TransactionService transactionService) {
         this.transactionService = transactionService;
@@ -24,8 +23,8 @@ public class TransactionController {
     }
 
     @PostMapping("/transactions")
-    public ResponseEntity<Void> newTransaction(@RequestParam(value = "timestamp") String timestamp, @RequestParam(value = "amount") String amount) {
-        return this.transactionService.postTransaction(timestamp, amount);
+    public ResponseEntity<Void> newTransaction(@RequestBody Transaction transaction) {
+        return this.transactionService.postTransaction(transaction);
     }
 
     @DeleteMapping("/transactions")

@@ -5,6 +5,7 @@ import com.google.common.math.Quantiles;
 import java.util.List;
 
 public final class StatisticsUtils {
+
     public static Double getSum(List<Double> values) {
         return values.stream().mapToDouble(Double::doubleValue).sum();
     }
@@ -21,10 +22,9 @@ public final class StatisticsUtils {
         return values.stream().mapToDouble(Double::doubleValue).average().getAsDouble();
     }
 
-    public static Double getPercentile(List<Double> values){
+    public static Double getPercentile(List<Double> values) {
         return Quantiles.percentiles().index(90).compute(values);
     }
-
 
 
 }
