@@ -1,31 +1,24 @@
 package com.api.realtimestatisticsml.controllers;
 
-import com.api.realtimestatisticsml.models.Statistic;
 import com.api.realtimestatisticsml.repository.TransactionsCache;
-import com.api.realtimestatisticsml.utils.StatisticsUtils;
+import com.api.realtimestatisticsml.services.StatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class StatisticController {
 
-    private final TransactionsCache transactionsCache;
+    private final StatisticService statisticService;
 
-    public StatisticController(@Autowired TransactionsCache transactionsCache) {
-        this.transactionsCache = transactionsCache;
+    public StatisticController(@Autowired StatisticService statisticService) {
+        this.statisticService = statisticService;
     }
 
     @GetMapping("/statistics")
-    public Statistic statistics() {
-        return new Statistic(
-                StatisticsUtils.getSum(this.transactionsCache.getAllAmounts()),
-                StatisticsUtils.getMax(this.transactionsCache.getAllAmounts()),
-                StatisticsUtils.getMin(this.transactionsCache.getAllAmounts()),
-                StatisticsUtils.getAvg(this.transactionsCache.getAllAmounts()),
-                transactionsCache.countTransactions(),
-                StatisticsUtils.getP90(this.transactionsCache.getAllAmounts())
-        );
+    public ResponseEntity statistics() {
+        return ResponseEntity.ok(this.statisticService.getStatistic());
     }
 
 }

@@ -23,8 +23,8 @@ public class TransactionController {
     }
 
     @GetMapping("/transactions")
-    public List<Transaction> getTransactions() {
-        return this.transactionService.getTransactions();
+    public ResponseEntity getTransactions() {
+        return ResponseEntity.ok(this.transactionService.getTransactions());
     }
 
     @PostMapping("/transactions")
@@ -34,6 +34,7 @@ public class TransactionController {
 
     @DeleteMapping("/transactions")
     public ResponseEntity<Void> deleteTransactions() {
-        return this.transactionService.cleanCache();
+        this.transactionService.cleanCache();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
