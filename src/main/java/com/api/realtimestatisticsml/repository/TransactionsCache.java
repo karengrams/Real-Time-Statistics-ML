@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @Component
 public class TransactionsCache {
 
-
     private Cache<UUID, Transaction> cache = buildCache();
 
     public Cache<UUID, Transaction> buildCache(){
