@@ -7,31 +7,33 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Component
 public class TransactionsCache {
 
-    private Cache<Integer, Transaction> cache = buildCache();
 
-    public Cache<Integer, Transaction> buildCache(){
+    private Cache<UUID, Transaction> cache = buildCache();
+
+    public Cache<UUID, Transaction> buildCache(){
         return CacheBuilder
                 .newBuilder()
                 .expireAfterWrite(60, TimeUnit.SECONDS)
                 .build();
     }
 
-    public Cache<Integer, Transaction> getCache(){
+    public Cache<UUID, Transaction> getCache(){
         return this.cache;
     }
 
-    public void setCache(Cache<Integer, Transaction> newCache){
+    public void setCache(Cache<UUID, Transaction> newCache){
         this.cache = newCache;
     }
 
     public void addNewTransaction(Transaction transaction){
-        this.cache.put(transaction.hashCode(),transaction);
+        this.cache.put(UUID.randomUUID(),transaction);
     }
 
     public void cleanCache(){
@@ -47,6 +49,6 @@ public class TransactionsCache {
     }
 
     public double countTransactions(){
-        return Double.valueOf(this.cache.size());
+        return this.getAllTransactions().size();
     }
 }
