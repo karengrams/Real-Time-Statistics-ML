@@ -20,8 +20,8 @@ public class TransactionService {
     }
 
     public ResponseEntity<Void> postTransaction(Transaction transaction) {
-
-        if (Instant.now().isBefore(transaction.getTimestamp())) {
+        
+        if (transaction.getTimestamp().isAfter(Instant.now())) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
