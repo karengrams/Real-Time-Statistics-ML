@@ -37,9 +37,8 @@ public class TransactionService {
         return this.transactionsCache.getAllTransactions();
     }
 
-    public ResponseEntity<Void> cleanCache() {
+    public void cleanCache() {
         this.transactionsCache.cleanCache();
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
