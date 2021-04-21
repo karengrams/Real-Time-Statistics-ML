@@ -2,15 +2,15 @@ package com.api.realtimestatisticsml.models;
 
 public class Statistic {
 
-    private final Double sum;
-    private final Double max;
-    private final Double min;
-    private final Double avg;
-    private final long count;
-    private final Double p90;
+    private final double sum;
+    private final double max;
+    private final double min;
+    private final double avg;
+    private final double count;
+    private final double p90;
 
 
-    public Statistic(Double sum, Double max, Double min, Double avg, long count, Double p90) {
+    public Statistic(double sum, double max, double min, double avg, double count, double p90) {
         this.sum = sum;
         this.max = max;
         this.min = min;
@@ -19,25 +19,28 @@ public class Statistic {
         this.p90 = p90;
     }
 
-    public Double getSum() {
+    public double getSum() {
         return this.sum;
     }
 
-    public Double getMax() {
+    public double getMax() {
         return this.max;
     }
 
-    public Double getMin() {
+    public double getMin() {
         return this.min;
     }
 
-    public Double getAvg() {
+    public double getAvg() {
         return this.avg;
     }
 
-    public Double getPercentile() {
+    public double getP90() {
         return this.p90;
     }
 
+    public double getCount() {
+        return this.count;
+    }
 
 }

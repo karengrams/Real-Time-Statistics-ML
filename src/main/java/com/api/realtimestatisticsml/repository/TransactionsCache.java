@@ -46,7 +46,7 @@ public class TransactionsCache {
         return this.cache.asMap().values().stream().map(transaction -> transaction.getAmount()).collect(Collectors.toList());
     }
 
-    public long countTransactions(){
-        return this.cache.size();
+    public double countTransactions(){
+        return Double.valueOf(this.cache.size());
     }
 }
