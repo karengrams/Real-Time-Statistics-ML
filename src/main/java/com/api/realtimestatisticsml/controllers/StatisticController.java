@@ -24,7 +24,7 @@ public class StatisticController {
                 StatisticsUtils.getMin(this.transactionsCache.getAllAmounts()),
                 StatisticsUtils.getAvg(this.transactionsCache.getAllAmounts()),
                 transactionsCache.countTransactions(),
-                StatisticsUtils.getPercentile(this.transactionsCache.getAllAmounts())
+                StatisticsUtils.getP90(this.transactionsCache.getAllAmounts())
         );
     }
 
