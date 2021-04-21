@@ -9,7 +9,12 @@ public class Transaction {
     private Instant timestamp;
 
     @NotNull(message = "amount cannot be null")
-    private Double amount;
+    private double amount;
+
+    public Transaction(Instant timestamp, double amount) {
+        this.timestamp = timestamp;
+        this.amount = amount;
+    }
 
     public Instant getTimestamp() {
         return timestamp;
