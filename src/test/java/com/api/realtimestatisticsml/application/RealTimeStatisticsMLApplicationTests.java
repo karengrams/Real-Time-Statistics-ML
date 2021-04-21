@@ -4,6 +4,7 @@ import com.api.realtimestatisticsml.RealTimeStatisticsMlApplication;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,19 +49,6 @@ public class RealTimeStatisticsMLApplicationTests {
     }
 
     @Test
-    public void ifTransactionsTimestampIsInTheFutureTheResponseWillBe422() throws Exception {
-        String futureTransaction = getTransactionJson(Instant.now().plus(5, ChronoUnit.DAYS).toString(), "4323.234");
-
-        ResultActions mvcResult = this.mockMvc.perform(
-                MockMvcRequestBuilders
-                        .post("/transactions")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(futureTransaction));
-
-        mvcResult.andExpect(status().isUnprocessableEntity());
-    }
-
-    @Test
     public void aTransactionShouldntBeCreatedIfThereIsOneUnparsedValue() throws Exception {
 
         String unparsedTransaction = getTransactionJson(Instant.now().toString(), "324j.3424");
@@ -89,19 +77,6 @@ public class RealTimeStatisticsMLApplicationTests {
     }
 
     @Test
-    public void ifATransactionIsCreatedInTheResponseWillBe201() throws Exception {
-        String validTransaction = getTransactionJson(Instant.now().toString(), "4323.234");
-
-        ResultActions mvcResult = this.mockMvc.perform(
-                MockMvcRequestBuilders
-                        .post("/transactions")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(validTransaction));
-
-        mvcResult.andExpect(status().isCreated());
-    }
-
-    @Test
     public void checkIfStatisticsHasBeenCreatedWhenTransactionIsCreated() throws Exception {
         String validTransaction = getTransactionJson(Instant.now().toString(), "4323.234");
 
@@ -115,15 +90,14 @@ public class RealTimeStatisticsMLApplicationTests {
                 get("/statistics").accept(MediaType.APPLICATION_JSON)
         );
 
-
         JSONObject jsonObject = new JSONObject(mvcStatistics.andReturn().getResponse().getContentAsString());
 
-        assertEquals(4323.234, jsonObject.get("sum"));
-        assertEquals(4323.234, jsonObject.get("max"));
-        assertEquals(4323.234, jsonObject.get("min"));
-        assertEquals(4323.234, jsonObject.get("p90"));
-        assertEquals(4323.234, jsonObject.get("avg"));
-        assertEquals(1.0, jsonObject.get("count"));
+        Assert.assertEquals(4323.234, jsonObject.get("sum"));
+        Assert.assertEquals(4323.234, jsonObject.get("max"));
+        Assert.assertEquals(4323.234, jsonObject.get("min"));
+        Assert.assertEquals(4323.234, jsonObject.get("p90"));
+        Assert.assertEquals(4323.234, jsonObject.get("avg"));
+        Assert.assertEquals(1.0, jsonObject.get("count"));
 
     }
 
