@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class ExceptionsHandler {
+public class HandleEntityUnparsedException {
 
     @ExceptionHandler(InvalidFormatException.class)
     protected ResponseEntity<Object> handleEntityUnparsed(
