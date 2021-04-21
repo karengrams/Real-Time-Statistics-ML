@@ -5,7 +5,7 @@
   - [Requirements](#requirements)
     - [Set up](#set-up)
   - [How to setup to run locally](#how-to-run-locally)
-  - [How to setup to run locally](#how-to-run-in-docker-container)
+  - [How to run in Docker container](#how-to-run-in-docker-container)
 - [How it works](#how-it-works)
 - [Decision taken](#decisions-taken)
 
